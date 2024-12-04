@@ -7,7 +7,6 @@ class Solution {
     }
     // If this state has already been processed
     
-    
     // Include current element
     fun(ind + 1, n, sum + arr[ind], temp, arr);
     
