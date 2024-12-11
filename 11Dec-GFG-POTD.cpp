@@ -40,3 +40,29 @@ class Solution {
       }
     }
 };
+
+
+// Optimized code
+class Solution {
+  public:
+    void mergeArrays(vector<int>& a, vector<int>& b) 
+    {
+      int n=a.size();
+      int m=b.size();
+      
+       int i=0,j=0;
+       
+       while(i<n && j<m)
+       {
+           if(a[i]>b[j])
+           {
+               swap(a[i],b[j]);
+           }
+           i++;
+           
+           
+           sort(b.begin(),b.end());
+       }
+    }
+};
+
