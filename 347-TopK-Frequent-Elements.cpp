@@ -1,3 +1,8 @@
+using namespace std;
+#include<vector>
+#include<queue>
+#include<unordered_map>
+
 class Solution {
 public:
     vector<int> topKFrequent(vector<int>& nums, int k) 
@@ -14,7 +19,7 @@ public:
     // Custom comparator to compare based on frequency (second element of the pair)
     auto compare = [](std::pair<int, int>& a, std::pair<int, int>& b) {
         return a.second < b.second;  // Min-heap comparison: lower frequency comes first
-    };
+    };  
 
     // Priority queue with the custom comparator (max-heap by frequency)
     std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, decltype(compare)> maxheap(compare);
