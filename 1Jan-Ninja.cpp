@@ -1,3 +1,6 @@
+using namespace std;
+#include<vector>
+#include<stack>
 vector<int> answerQueries(vector<vector<int>> &queries, int limit) 
 {
     stack<int>st;

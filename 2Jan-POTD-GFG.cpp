@@ -1,3 +1,6 @@
+using namespace std;
+#include<vector>
+#include<unordered_map>
 class Solution {
   public:
     int countSubarrays(vector<int> &arr, int k) 
