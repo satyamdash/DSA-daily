@@ -1,4 +1,4 @@
-#include <bits/stdc++.h> 
+using namespace std;
 
 int toggleKBits(int n, int k) 
 {
