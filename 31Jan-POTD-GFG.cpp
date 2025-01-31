@@ -2,17 +2,17 @@ class Solution {
   public:
   bool isSafe(vector<vector<int>> &mat,int row,int col,int num)
   {
-      // Check if num exist in the row
+
     for (int x = 0; x <= 8; x++)
         if (mat[row][x] == num)
             return false;
 
-    // Check if num exist in the col
+   
     for (int x = 0; x <= 8; x++)
         if (mat[x][col] == num)
             return false;
 
-    // Check if num exist in the 3x3 sub-matrix
+    
     int startRow = row - (row % 3), startCol = col - (col % 3);
 
     for (int i = 0; i < 3; i++)
@@ -50,7 +50,7 @@ class Solution {
       
           return false;
     }
-    
+
     void solveSudoku(vector<vector<int>> &mat) {
         
          solveSudokuRec(mat, 0, 0);
