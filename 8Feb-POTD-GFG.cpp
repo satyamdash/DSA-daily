@@ -1,101 +1,83 @@
 class Solution {
   public:
-  bool isLeaf(Node *node) {
-    return node->left == nullptr && node->right == nullptr;
-}
-
-// Function to collect the left boundary nodes
-void collectBoundaryLeft(Node *root, vector<int> &res) {
-    if (root == nullptr)
-        return;
-
-    Node *curr = root;
-    while (!isLeaf(curr)) {
-        res.push_back(curr->data);
-
-        if (curr->left)
-            curr = curr->left;
-        else
-            curr = curr->right;
+  bool isLeaf(Node *node) 
+    {
+        return node->left == nullptr && node->right == nullptr;
     }
-}
-
-// Function to collect the leaf nodes using Morris Traversal
-void collectLeaves(Node* root, vector<int>& res) {
-    Node* current = root;
-
-    while (current) {
-        if (current->left == nullptr) {
-          
-            // If it's a leaf node
-            if (current->right == nullptr) 
-                res.push_back(current->data);
-            
-            current = current->right;
-        } 
-          else {
-          
-            // Find the inorder predecessor
-            Node* predecessor = current->left;
-            while (predecessor->right && predecessor->right != current) {
-                predecessor = predecessor->right;
+    
+    void LeftBoundary(Node *root,vector<int>&res)
+    {
+        Node*cur=root->left;
+        
+        while(cur)
+        {
+            if (!isLeaf(cur)) {
+                res.push_back(cur->data);
             }
-
-            if (predecessor->right == nullptr) {
-                predecessor->right = current;
-                current = current->left;
-            } 
-              else {
-                  // If it's predecessor is a leaf node
-                if (predecessor->left == nullptr) 
-                    res.push_back(predecessor->data);
-                
-                predecessor->right = nullptr;
-                current = current->right;
+            if(cur->left!=NULL)
+            {
+                cur=cur->left;
+            }
+            else
+            {
+                cur=cur->right;
             }
         }
     }
-}
-
-// Function to collect the right boundary nodes
-void collectBoundaryRight(Node *root, vector<int> &res) {
-    if (root == nullptr)
-        return;
-
-    Node *curr = root;
-    vector<int> temp;
-    while (!isLeaf(curr)) {
-      
-        temp.push_back(curr->data);
-
-        if (curr->right)
-            curr = curr->right;
-        else
-            curr = curr->left;
+    
+    void RightBoundary(Node *root,vector<int>&res)
+    {
+        Node *cur=root->right;
+        vector<int>temp;
+        while(cur)
+        {
+            if(!isLeaf(cur))
+            {
+                temp.push_back(cur->data);
+            }
+            if(cur->right)
+            {
+                cur=cur->right;
+            }
+            else
+            {
+                cur=cur->left;
+            }
+        }
+        
+        reverse(temp.begin(),temp.end());
+        res.insert(res.end(), temp.begin(), temp.end());
+        
     }
-    for (int i = temp.size() - 1; i >= 0; --i)
-        res.push_back(temp[i]);
-}
-
-    vector<int> boundaryTraversal(Node *root) {
-         vector<int> res;
-
-    if (!root)
+    void addLeaf(Node *root,vector<int>&res)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        
+        addLeaf(root->left,res);
+        if(isLeaf(root))
+        {
+            res.push_back(root->data);
+        }
+        addLeaf(root->right,res);
+    }
+    
+    vector<int> boundaryTraversal(Node *root) 
+    {
+        vector<int>res;
+        if(root==NULL) return res;
+        if (!isLeaf(root)) {
+            res.push_back(root->data);
+        }
+        
+        LeftBoundary(root,res);
+        addLeaf(root,res);
+        RightBoundary(root,res);
+        
+        
         return res;
 
-    // Add root data if it's not a leaf
-    if (!isLeaf(root))
-        res.push_back(root->data);
-
-    // Collect left boundary
-    collectBoundaryLeft(root->left, res);
-
-    // Collect leaf nodes
-    collectLeaves(root, res);
-
-    // Collect right boundary
-    collectBoundaryRight(root->right, res);
-
-    return res;
     }
 };
