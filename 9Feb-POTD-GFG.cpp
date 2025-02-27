@@ -7,7 +7,6 @@ class Solution {
         {
             return 0;
         }
-        int leftSum=max(0,findMaxi(root->left,maxi));
         int rightSum=max(0,findMaxi(root->right,maxi));
         maxi=max(maxi,leftSum+rightSum+root->data);
         
