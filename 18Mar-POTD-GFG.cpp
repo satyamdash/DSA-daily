@@ -1,16 +1,16 @@
 class Solution {
   public:
   
-    int f(int idx,vector<int>&arr,int sum,vector<vector<int>>&dp)
-    {
-        if(sum==0) return true;
-        if(idx<0) return false;
-        
-        if(dp[idx][sum]!=-1) return dp[idx][sum];
-        if(arr[idx]>sum) return dp[idx][sum]=f(idx-1,arr,sum,dp);
+        int f(int idx,vector<int>&arr,int sum,vector<vector<int>>&dp)
+        {
+            if(sum==0) return true;
+            if(idx<0) return false;
+            
+            if(dp[idx][sum]!=-1) return dp[idx][sum];
+            if(arr[idx]>sum) return dp[idx][sum]=f(idx-1,arr,sum,dp);
 
-        return dp[idx][sum]=f(idx-1,arr,sum-arr[idx],dp) || f(idx-1,arr,sum,dp);
-    }
+            return dp[idx][sum]=f(idx-1,arr,sum-arr[idx],dp) || f(idx-1,arr,sum,dp);
+        }
     bool equalPartition(vector<int>& arr) {
         // code here
         int sum=0;
