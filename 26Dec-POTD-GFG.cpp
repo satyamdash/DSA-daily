@@ -1,3 +1,6 @@
+#include<vector>
+#include<algorithm>
+using namespace std;
 class Solution {
   public:
     bool twoSum(vector<int>& arr, int target) 
