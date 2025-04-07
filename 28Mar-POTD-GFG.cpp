@@ -2,6 +2,7 @@
 #include<algorithm>
 using namespace std;
 
+
 class Solution {
   public:
     static bool comp(const pair<int,int>p1,const pair<int,int>p2)
