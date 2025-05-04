@@ -23,3 +23,29 @@ public:
         return ans;
     }
 };
+
+
+//2nd Approach
+
+class Solution {
+public:
+struct hash_pair {
+    size_t operator()(const pair<int, int>& p) const {
+        return hash<int>()(p.first) ^ (hash<int>()(p.second) << 1);
+    }
+};
+    int numEquivDominoPairs(vector<vector<int>>& dominoes) {
+        int n=dominoes.size();
+        unordered_map<pair<int, int>, int, hash_pair> mpp;
+        
+        int ans=0;
+
+        for (auto& dom : dominoes) {
+            sort(dom.begin(), dom.end());
+            pair<int, int> p = {dom[0], dom[1]};
+            ans += mpp[p]; // If exists, add the count
+            mpp[p]++;      // Add current domino
+        }
+        return ans;
+    }
+};
